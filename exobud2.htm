@@ -1,0 +1,207 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>:: ExoBUD MP 网站媒体播放程序(雨网国际官方简体中文版) ::</title>
+<meta name="Author" content="ExoBUD, Jinwoong Yu,yune_lee">
+<meta name="Keywords" content="ExoBUD MP">
+<meta name="Description" content="asf,asx,wma,wmx,wmv,wvx,mp3,wav,mid 网站媒体播放程序">
+<link rel="stylesheet" type="text/css" href="exobud.css">
+<!-- 
+===============================[程序信息及版权宣告]===================================
+ExoBUD MP(II) v4.1tc+ [Sample Chinese Version]
+Copyright(Pe) 1999-2004 Jinwoong Yu[ExoBUD], yune_lee[liyu.net]
+======================================================================================
+程序原作者: 庾珍雄(Jinwoong Yu) 
+个人网站: http://exobud.nayana.org 
+电子邮件: exobud@hanmail.net
+简体中文化作者: liyu(yune_lee)
+个人网站: http://www.liyu.net
+下载提供: http://www.codefans.net
+电子邮件: yune_lee@163.net
+0ICQ 账号: 4410162
+发表日期: 2003.01.10(此版本原韩文版) 
+发表日期: 2003.05.22(简体中文首个版本)
+======================================================================================
+   请尊重智慧财产权： 无论您对本程序 ExoBUD MP(II) 作任何修改、制作(或翻译)面板，请您
+*必须*保留此段版权宣告的内容，包括程序(及面板)原作者及中文化作者的名字和网站连结。
+ 如果您想要以繁体中文版或简体中文版的程序为基础，翻译成其它语言的版本，及／或在因特网
+上，公开发表您所修改过的版本，请您首先以传送电子邮件的方式，征求我们的同意。
+  请不要将程序(或面板)原作者或中文化作者的名字改成您自己的名字，然后以另一程序名称重新
+命名后在网络上公开发表及散播本程序，因为这是严重的侵权行为。
+  这是公益免费程序，所以请不要使用在商业用途上。
+  另外，您亦不可将本程序(全部或部份)复制到其它储存媒体(例如光盘片)上作贩卖获利用途。
+  假如因为使用本程序而令您蒙受数据遗失或损毁，程序原作者及中文化作者均不用对其负责。
+===============================[面板(Skin)制作信息]===================================
+ExoBUD MP winamp 面版 
+雨网国际(www.liyu.net)官方简体中文版，独家面板下载！
+===============================[注意事项]=============================================
+  如果你不是十分熟悉html和JavaScript语言，请不要修改以下的代码，否则十分容易造成程序错
+误。当您修改本程序的原始码时，请注意执行修改后的程序，可能会导致一些正在执行中的应用程
+序无法正常运作；另外亦要留意在JavaScript上所使用的变量名称和设定值，大小写是有分别的。
+======================================================================================
+-->
+<!-- 加载 ExoBUD MP(II) 主程序 -->
+<script language="JavaScript" src="exobud.js"></script>
+<!-- 加载 ExoBUD MP(II) 基本设定档 -->
+<script language="JavaScript" src="exobudset.js"></script>
+<!-- 加载 ExoBUD MP(II) 播放清单设定文件 -->
+<script language="JavaScript" src="exobudpl.js"></script>
+<!-- 如果您不熟悉原始码编辑，请勿随便修改下面使用 JScript 的部份，否则可能会导致程序不能正常运作 -->
+<script language="JScript" for="Exobud" event="openStateChange(sf)">evtOSChg(sf);</script>
+<script language="JScript" for="Exobud" event="playStateChange(ns)">evtPSChg(ns);</script>
+<script language="JScript" for="Exobud" event="error()">evtWmpError();</script>
+<script language="JScript" for="Exobud" event="Buffering(bf)">evtWmpBuff(bf);</script>
+<!-- 加载动态按钮图片的 JavaScript 程序文件 -->
+<script language="JavaScript" src="imgchg.js"></script>
+</head>
+
+<body onLoad="initExobud();" oncontextmenu="window.event.returnValue=false" ondragstart="window.event.returnValue=false" onselectstart="event.returnValue=false" 
+topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
+<table border="0" cellpadding="0" cellspacing="0" width="310">
+      <tr>
+    <td>
+	 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="75"><img border="0" src="./img/1.gif" width="75" height="21"></td>
+          <td background="./img/2.gif"><img border="0" src="./img/tit.gif" width="120" height="21"></td>
+          <td width="102"><img border="0" src="./img/3.gif" width="102" height="21"></td>
+        </tr>
+      </table>
+	  </td>
+  </tr>
+  <tr>
+    <td><img border="0" src="./img/6.gif" width="310" height="23"></td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="17" rowspan="2"><img border="0" src="./img/7.gif" width="17" height="50"></td>
+          <td background="./img/8.gif" width="228" height="28">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%"><tr>
+                <td nowrap onClick="chgTimeFmt()" align=center><span id="disp2" class="time" title="时间长度显示方式 (正常/倒数)"
+style="width:105;cursor:default;padding-bottom:2px"><strong><font color="#FFFFFF">00:00 
+                  | 00:00</font></strong></span></td>
+ <td align=right><img name="scope" src="./img/act.gif" onClick="vizExobud()" style="cursor:help" title="访问 播放器核心 原作者网站 [韩文]" width="81" height="28"></td> </tr></table>
+          </td>
+          <td width="17" rowspan="2"><img border="0" src="./img/10.gif" width="17" height="50"></td>
+          <td width="44" rowspan="2" background="./img/11.gif">
+            <div align="center">
+              <center>
+              <table border="0" cellpadding="0" cellspacing="1">
+                <tr>
+                  <td><img border="0" src="./img/suiji.gif" width="36" height="19" name="pmode" onClick="chgPMode()"
+onMouseOver="imgtog('pmode',2)" onMouseOut="imgtog('pmode',3)" style="cursor:default" title="播放顺序 (S=循序 R=随机)"></td>
+                </tr>
+                <tr>
+                  <td><img border="0" src="./img/s.gif" width="36" height="19" name="rept" onClick="chkRept()"
+onMouseOver="imgtog('rept',2)" onMouseOut="imgtog('rept',3)" style="cursor:default" title="切换是否重复播放目前的曲目"></td>
+                </tr>
+              </table>
+              </center>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td background="./img/9.gif" width="228" height="22"><marquee><span id="disp1" class="title">ExoBUD MP 网站媒体播放程序(雨网国际官方简体中文版) </span></marquee></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="6"><img border="0" src="./img/12.gif" width="6" height="24"></td>
+          <td width="210" background="./img/13.gif">
+          <div id="CourseButtonBox" style="height:24;width:210;"><img id="CourseButton" src="./img/tscr.gif" style="position:relative;left:0;height:24;width:32" onmousedown="button_down()" onmousemove="button_move()" onmouseup="button_up()"></div>
+          </td>
+          <td width="93"><img name="plist" src="img/14.gif" width=93 height=24 border=0 onClick="openPlist()" style="cursor:hand" title="显示播放清单内容"
+></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="184" background="./img/15.gif" valign="top">
+            <div align="left">
+              <table border="0" cellpadding="0" cellspacing="0" style="position: relative; left: 5; top: 0" width="184">
+                <tr>
+                  <td width="28"><img border="0" src="./img/pre.gif" width="28" height="26" name="prevt" onClick="playPrev()"
+onMouseOver="imgtog('prevt',2)" onMouseOut="imgtog('prevt',3)" style="cursor:default" title="上一首曲目"></td>
+                  <td width="29"><img border="0" src="./img/play.gif" width="29" height="29" name="playt" onClick="startExobud()"
+onMouseOver="imgtog('playt',2)" onMouseOut="imgtog('playt',3)" style="cursor:default" title="播放"></td>
+                  <td width="28"><img border="0" src="./img/pause.gif" width="29" height="28" name="pauzt" onClick="wmpPP()"
+onMouseOver="imgtog('pauzt',2)" onMouseOut="imgtog('pauzt',3)" style="cursor:default" title="暂停．继续"></td>
+                  <td width="29"><img border="0" src="./img/stop.gif" width="29" height="29" name="stopt" onClick="wmpStop()"
+onMouseOver="imgtog('stopt',2)" onMouseOut="imgtog('stopt',3)" style="cursor:default" title="停止"></td>
+                  <td width="28"><img border="0" src="./img/bef.gif" width="28" height="26" name="nextt" onClick="playNext()"
+onMouseOver="imgtog('nextt',2)" onMouseOut="imgtog('nextt',3)" style="cursor:default" title="下一首曲目"></td>
+                  <td valign="bottom" width="42" align=center><img border="0" src="./img/wave.gif" width="19" height="20" align=absMiddle name="vmute" onClick="wmpMute()"
+onMouseOver="imgtog('vmute',2)" onMouseOut="imgtog('vmute',3)" style="cursor:default" title="静音模式"></td>
+                </tr>
+              </table>
+            </div>
+          </td>
+          <td width="83" background="./img/16.gif">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td background="./img/scr.gif" height="5">
+                <div id="VolumeButtonBox" style="height:10;width:83;"><img id="VolumeButton" src="./img/scrc.gif" style="position:relative;left:65;height:10;width:18" onmousedown="button_down()" onmousemove="button_move()" onmouseup="button_up()" title="控制音量"></div>
+                </td>
+              </tr>
+              <tr>
+                <td background="./img/scr.gif" height="5">
+                <div id="TrackButtonBox" style="height:10;width:83;"><img id="TrackButton" src="./img/scrc.gif" style="position:relative;left:32;height:10;width:18" onmousedown="button_down()" onmousemove="button_move()" onmouseup="button_up()" title="控制左右声道"></div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="43"><img border="0" src="./img/17.gif" width="43" height="33"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+  <td>
+
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr> 
+          <td width="3" rowspan="2" background="./img/4.gif"></td>
+          <td bgcolor="#000000" width="304"> <object id="Exobud" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6"
+type="application/x-oleobject" width="304" height="80"
+>
+              <param name="autoStart" value="true">
+              <param name="balance" value="0">
+              <param name="currentPosition" value="0">
+              <param name="currentMarker" value="0">
+              <param name="enableContextMenu" value="false">
+              <param name="enableErrorDialogs" value="false">
+              <param name="enabled" value="true">
+              <param name="fullScreen" value="false">
+              <param name="invokeURLs" value="false">
+              <param name="mute" value="false">
+              <param name="playCount" value="1">
+              <param name="rate" value="1">
+              <param name="uiMode" value="none">
+              <param name="volume" value="100">
+            </object> <div id="capText" style="width:100%;height:22;color:white;background-color:#000000;padding-top:3px;padding-left:5px;display:none"
+><font class=title> Exobud MP 字幕显示(SMI)</font></div></td>
+          <td width="3" rowspan="2" background="./img/5.gif"></td>
+        </tr>
+        <tr>
+          <td height="3" background="img/scroll.gif"></td>
+        </tr>
+      </table>
+	  </td>
+	  </tr>
+</table>
+</body>
+</html>
